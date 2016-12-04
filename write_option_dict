@@ -1,0 +1,22 @@
+#!/usr/bin/python
+import json
+import os
+import sys
+from aws_tools import *
+from urllib2 import urlopen
+
+if __name__ == "__main__":
+
+    # print("Length of sys.argv : " + str(len(sys.argv)))
+    if len(sys.argv) < 3:
+        print('>>> ./write_option_dict $fname $keyname (empty string)')
+        print('>>> ./write_option_dict $fname $keyname $keyvalue')
+    else:
+        fname = sys.argv[1]
+        keyname = sys.argv[2]
+        if len(sys.argv) ==3:
+            keyvalue=""
+        else:
+            keyvalue = sys.argv[3]
+        print(keyname+" = "+keyvalue)
+        write_option_json(fname, keyname, keyvalue)

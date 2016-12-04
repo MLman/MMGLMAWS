@@ -1,0 +1,19 @@
+#!/usr/bin/python
+import os
+import sys
+from subprocess import call
+from aws_tools import * 
+from scheduler import *
+
+
+# To get filename only from filepath without extension
+# os.path.splitext(os.path.basename(fpath))[0] 
+if __name__ == "__main__":
+    if len(sys.argv) < 4:
+        print('>>> ./killjobs_on_remote_servers keypairpath binname ip1 ip2 ...' )
+    else:
+        keypairpath = sys.argv[1]
+        IPs = sys.argv[3:]
+        binname = sys.argv[2]
+        for IP in IPs:
+            kill_all_jobs_on_server(IP,keypairpath,binname)

@@ -1,0 +1,114 @@
+{
+    "Reservations": [
+        {
+            "OwnerId": "705542431450", 
+            "ReservationId": "r-6d18bad3", 
+            "Groups": [], 
+            "Instances": [
+                {
+                    "Monitoring": {
+                        "State": "disabled"
+                    }, 
+                    "PublicDnsName": "ec2-54-166-26-162.compute-1.amazonaws.com", 
+                    "State": {
+                        "Code": 16, 
+                        "Name": "running"
+                    }, 
+                    "EbsOptimized": true, 
+                    "LaunchTime": "2016-10-19T20:14:29.000Z", 
+                    "PublicIpAddress": "54.166.26.162", 
+                    "PrivateIpAddress": "172.31.55.180", 
+                    "ProductCodes": [], 
+                    "VpcId": "vpc-7cad0018", 
+                    "StateTransitionReason": "", 
+                    "InstanceId": "i-b0f13081", 
+                    "ImageId": "ami-2d39803a", 
+                    "PrivateDnsName": "ip-172-31-55-180.ec2.internal", 
+                    "KeyName": "hyunwoo_key", 
+                    "SecurityGroups": [
+                        {
+                            "GroupName": "launch-wizard-23", 
+                            "GroupId": "sg-1592386f"
+                        }
+                    ], 
+                    "ClientToken": "JQjOX1472148241839", 
+                    "SubnetId": "subnet-59427772", 
+                    "InstanceType": "m4.4xlarge", 
+                    "NetworkInterfaces": [
+                        {
+                            "Status": "in-use", 
+                            "MacAddress": "12:27:57:43:b7:77", 
+                            "SourceDestCheck": true, 
+                            "VpcId": "vpc-7cad0018", 
+                            "Description": "", 
+                            "Association": {
+                                "PublicIp": "54.166.26.162", 
+                                "PublicDnsName": "ec2-54-166-26-162.compute-1.amazonaws.com", 
+                                "IpOwnerId": "amazon"
+                            }, 
+                            "NetworkInterfaceId": "eni-8a5a699a", 
+                            "PrivateIpAddresses": [
+                                {
+                                    "PrivateDnsName": "ip-172-31-55-180.ec2.internal", 
+                                    "Association": {
+                                        "PublicIp": "54.166.26.162", 
+                                        "PublicDnsName": "ec2-54-166-26-162.compute-1.amazonaws.com", 
+                                        "IpOwnerId": "amazon"
+                                    }, 
+                                    "Primary": true, 
+                                    "PrivateIpAddress": "172.31.55.180"
+                                }
+                            ], 
+                            "PrivateDnsName": "ip-172-31-55-180.ec2.internal", 
+                            "Attachment": {
+                                "Status": "attached", 
+                                "DeviceIndex": 0, 
+                                "DeleteOnTermination": true, 
+                                "AttachmentId": "eni-attach-52964efa", 
+                                "AttachTime": "2016-08-25T18:04:02.000Z"
+                            }, 
+                            "Groups": [
+                                {
+                                    "GroupName": "launch-wizard-23", 
+                                    "GroupId": "sg-1592386f"
+                                }
+                            ], 
+                            "SubnetId": "subnet-59427772", 
+                            "OwnerId": "705542431450", 
+                            "PrivateIpAddress": "172.31.55.180"
+                        }
+                    ], 
+                    "SourceDestCheck": true, 
+                    "Placement": {
+                        "Tenancy": "default", 
+                        "GroupName": "", 
+                        "AvailabilityZone": "us-east-1b"
+                    }, 
+                    "Hypervisor": "xen", 
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1", 
+                            "Ebs": {
+                                "Status": "attached", 
+                                "DeleteOnTermination": true, 
+                                "VolumeId": "vol-7fdbe8ad", 
+                                "AttachTime": "2016-08-25T18:04:02.000Z"
+                            }
+                        }
+                    ], 
+                    "Architecture": "x86_64", 
+                    "RootDeviceType": "ebs", 
+                    "RootDeviceName": "/dev/sda1", 
+                    "VirtualizationType": "hvm", 
+                    "Tags": [
+                        {
+                            "Value": "Mona30GMaster", 
+                            "Key": "Name"
+                        }
+                    ], 
+                    "AmiLaunchIndex": 0
+                }
+            ]
+        }
+    ]
+}

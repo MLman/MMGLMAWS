@@ -1,0 +1,18 @@
+#!/usr/bin/python
+import os
+import sys
+from subprocess import call
+from aws_tools import * 
+from scheduler import *
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 5:
+        print('>>> ./transfer_files_to_slaves $slave_ip_path $key_pair_path $input_dir $job_ip_tab_path')
+    else:
+        slave_ip_path = sys.argv[1]
+        key_pair_path = sys.argv[2]
+        input_dir = sys.argv[3]
+        job_ip_tab_path = sys.argv[4]
+        jobnames, IPs = transfer_files4script(slave_ip_path, key_pair_path, input_dir)
+        write_job_ip_tab(jobnames, IPs, job_ip_tab_path)

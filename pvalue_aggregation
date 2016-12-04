@@ -1,0 +1,51 @@
+#!/usr/bin/python
+import os
+from aws_tools import *
+
+def mytxtread(fin):
+    fres=open(fin,'r')
+    restxt = fres.read()
+    lines = restxt.split('\n')
+    fres.close()
+    return lines
+
+def main(datadir, resultdir,outputpath):
+    outstrlist=[]
+
+    dirnames = get_dirnames(datadir)
+    fnames = get_filenames(resultdir)
+    if 'shared' in dirnames: dirnames.remove('shared')
+    assert len(dirnames) == len(fnames)
+
+    for i in range(len(fnames)):
+        respath = os.path.join(resultdir,fnames[i])
+        datpath = os.path.join(datadir,os.path.splitext(fnames[i])[0]+'/mask_job_arma.mat')
+        outstrlist.append(get_merged_txt(respath,datpath))
+
+    outstr='\n'.join(outstrlist)    
+
+    fout = open(outputpath,'w')
+    fout.write(outstr)
+    fout.close()
+
+def get_merged_txt(respath,datpath):
+    pos = mytxtread(datpath) 
+    pvals = mytxtread(respath)
+    outstr = '\n'.join([','.join([pvals[i]]+str.split(pos[i])) for i in range(len(pvals))])
+    return outstr
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print('>>> ./pvalue_aggregation $datadir $resultdir ($outputpath)')
+        print('$cat outputpath')
+        print('--------------')
+        print('[pvalues, x,y,z]')
+    else:
+        datadir = sys.argv[1]
+        resultdir = sys.argv[2]
+        if len(sys.argv) == 4:
+            outputpath = sys.argv[3]
+        else:
+            outputpath='pvalues_with_pos.txt'
+        main(datadir,resultdir,outputpath)
+

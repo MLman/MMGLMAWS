@@ -1,0 +1,2 @@
+curdir=${PWD}
+echo $curdir

@@ -1,0 +1,12 @@
+#!/usr/bin/python
+import os
+import sys
+from aws_tools import * 
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print('>>> ./get_ReservationId silence_start_log.txt')
+    else:
+	fname = sys.argv[1]
+        ReservationId = get_ReservationId(fname)
+        print ReservationId

@@ -1,0 +1,17 @@
+#!/usr/bin/python
+import os
+import sys
+from aws_tools import * 
+
+if __name__ == "__main__":
+    if len(sys.argv) < 4:
+        print('>>> ./save_InstanceIds_by_ReservationId  $ReservationId $fin $fout')
+    else:
+	ReservationId = sys.argv[1]
+	finname = sys.argv[2]
+	foutname = sys.argv[3]
+	InstanceIds = get_InstanceId_by_ReservationId(finname, ReservationId)
+	fout=open(foutname,'w')
+	for ID in InstanceIds:
+	    fout.write(ID+"\n")
+        fout.close()

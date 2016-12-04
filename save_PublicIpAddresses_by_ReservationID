@@ -1,0 +1,28 @@
+#!/usr/bin/python
+import os
+import sys
+import time
+from subprocess import call
+from aws_tools import * 
+
+if __name__ == "__main__":
+    if len(sys.argv) < 4:
+        print('>>> ./save_PublicIpAddresses_by_ReservationID $ReservationId $fin $fout')
+    else:
+	ReservationId = sys.argv[1]
+	finname = sys.argv[2]
+	foutname = sys.argv[3]
+
+        while True:
+            try:
+  	        IPs = get_PublicIpAddress_by_ReservationId(finname, ReservationId)
+                break
+            except:
+                # It takes some time to assign public IPs to servers.
+                time.sleep(10)
+                call("aws ec2 describe-instances > "+finname,shell=True)
+        
+	fout=open(foutname,'w')
+	for ipaddr in IPs:
+	    fout.write(ipaddr+"\n")
+        fout.close()

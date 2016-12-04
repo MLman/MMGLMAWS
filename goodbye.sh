@@ -1,0 +1,11 @@
+echo "Done"
+echo ""
+echo "COPY YOUR DATA BACK TO YOUR LOCAL MACHINE"
+echo ""
+echo ""
+
+echo "--------------------------------------------"
+echo ""
+echo "© 2015-16 UW-Madison. All rights reserved"
+echo ""
+echo "--------------------------------------------"

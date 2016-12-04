@@ -1,0 +1,15 @@
+\n### OPTIONS ###\n
+Input Directory = /home/ubuntu/data/run_aws_ni_test_2vox
+Executable file = mmglm_spd
+Key pair file = hyunwoo_key.pem
+Key pair file path = /home/ubuntu/SECURITY_FILE/hyunwoo_key.pem
+Master Server InstanceId=i-b0f13081
+Maximum number of Servers = min(max_num_servers, njobs) = 2
+./main_script_with_python_ver2.sh | tee /dev/tty >  /home/ubuntu/temp/log.txt
+./main_script_with_python_ver2.sh: line 20: cd: /home/ubuntu/SCRIPT: No such file or directory
+rm: cannot remove ‘/home/ubuntu/temp/job_done’: Is a directory
+exp_1119041.log: No such file or directory
+exp_1110721.log: No such file or directory
+exp_111489.log: No such file or directory
+exp_1111553.log: No such file or directory
+Connection to 54.175.123.64 closed by remote host.

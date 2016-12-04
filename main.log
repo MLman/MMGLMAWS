@@ -1,0 +1,8 @@
+\n### OPTIONS ###\n
+Input Directory = /home/ubuntu/data/run_aws_ni_test_2vox
+Executable file = mmglm_spd
+Key pair file = hyunwoo_key.pem
+Key pair file path = /home/ubuntu/SECURITY_FILE/hyunwoo_key.pem
+Master Server InstanceId=i-b0f13081
+Maximum number of Servers = min(max_num_servers, njobs) = 2
+./main_script_with_python_ver2.sh | tee /dev/tty >  /home/ubuntu/temp/log.txt

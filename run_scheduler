@@ -1,0 +1,75 @@
+#!/usr/bin/python
+import json
+import os
+import sys
+from aws_tools import *
+from scheduler import *
+
+def main(option):
+    scheduler_info_path=option['scheduler_info_path'] 
+    key_pair_path=option['key_pair_path'] 
+    key_pair_name=get_filename_from_path(key_pair_path)
+    input_dir=option['input_dir']  
+    image_id=option['image_id']
+    security_group_ids=option['security_group_ids']
+
+    if len(security_group_ids) ==0:
+        security_group_ids=get_my_security_group_id()
+
+    scheduler_log_path=option['scheduler_log_path'] 
+    if len(scheduler_log_path):
+        scheduler_log_path=None
+
+    server_type=option['server_type']  
+    max_num_servers=option['max_num_servers'] 
+    logpath=option['logpath']
+    results_dir=option['results_dir'] 
+    local_run_script=option['local_run_script'] 
+    binpath=option['binpath'] 
+    log_change_only=option['log_change_only']
+    #Extra files to confirm that jobs are done and results are copied correctly.
+    job_done_dir=option['job_done_dir']  
+    sInstanceIds=option['sInstanceIds'] 
+    cleanup=False
+    if len(sInstanceIds)==0:
+        sInstanceIds=None
+    else:
+        sInstanceIds=sInstanceIds.split(',')
+        cleanup=True
+
+    # Init jobs
+    jobs = init_jobs(input_dir)
+
+    if sInstanceIds is None:
+        # Spawn servers
+        InstanceIds = spawn_servers(image_id,security_group_ids,key_pair_name,\
+        server_type,max_num_servers)
+    else:
+        # If InstanceIds are available of servers, then no spawning.
+        InstanceIds = sInstanceIds
+    
+
+
+    # Init servers' info. Setting IPs and InstanceIds, ncpus
+    servers = init_servers(InstanceIds, key_pair_path,cleanup)
+
+    # Transfer key_pair_file to slave servers
+    transfer_security_file_to_servers(input_dir, key_pair_path, servers)
+
+    status = init_scheduler(jobs, servers, option)
+    status['change']=True
+    # SAVE Status
+    save_scheduler_status_wrapper(scheduler_info_path,status,"init_servers"\
+                                  ,scheduler_log_path,log_change_only)
+
+    status = load_scheduler_status(scheduler_info_path)
+    polling(status)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print('>>> ./scheduler $tmp_dir/option_json')
+    else:
+        option = read_json_file(sys.argv[1])
+        main(option)
+
