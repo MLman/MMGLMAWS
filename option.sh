@@ -2,7 +2,7 @@
 #Author - Hyunwoo J. Kim, UW-Madison
 
 # Basic options
-key_pair_file=hyunwoo_key.pem
+key_pair_file=MGLM.pem
 server_type=t2.micro # or c4.8xlarge
 #server_type=c4.8xlarge
 input_dir=~/data/run_aws_ni_test_2vox
@@ -19,7 +19,7 @@ tmp_dir=~/temp
 logpath=$tmp_dir/log.txt
 option_json=$tmp_dir/option.json
 job_done_dir=$tmp_dir/job_done
-debug_level=1 # 0 (minimum) | 1 (some) | 2 (detailed)
+debug_level=2 # 0 (minimum) | 1 (some) | 2 (detailed)
 notermination=false # NOTermiatnion. Keep machines running.
 
 mkdir -p $tmp_dir
@@ -27,8 +27,9 @@ mkdir -p $job_done_dir
 mkdir -p ~/junk # For old log
 mkdir -p $results_dir
 local_run_script=local.sh
-image_id=ami-fce3c696
-security_group_ids="" # (default) security_group_id of Master Server
+#image_id=ami-fce3c696
+image_id=ami-82f4dae7
+security_group_ids="launch-wizard-2" # (default) security_group_id of Master Server
 #sInstanceIds="i-b17a1821,i-b27a1822" # (default) empty. This is for debugggin. No space
 sInstanceIds="" # (default) empty. This is for debugggin. No space, separated by commas
 key_pair_name=${key_pair_file%.*}

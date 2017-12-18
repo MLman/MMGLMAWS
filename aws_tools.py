@@ -296,9 +296,15 @@ def get_my_InstanceId(debug=False):
                                   "meta-data/instance-id", debug=debug)
 
 
+#def get_my_security_group_name(debug=False):
+#    return run_shell_check_output("wget -q -O - http://instance-data/latest/"
+#                                  "meta-data/security-groups", debug=debug)
+
 def get_my_security_group_name(debug=False):
-    return run_shell_check_output("wget -q -O - http://instance-data/latest/"
-                                  "meta-data/security-groups", debug=debug)
+    """This is a hacky solution. There exists the discrepancy between awscli and the web (aws.amazon.com)."""
+    return run_shell_check_output_json("aws ec2 describe-security-groups", debug=debug)['SecurityGroups'][0]['GroupName']
+
+
 
 
 def get_my_security_group_id(security_group_name=None, debug=False):

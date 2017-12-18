@@ -558,13 +558,14 @@ def display_scheduler_info(status, debug_level=0):
             Mypp.pprint(status['servers'])
             display_jQueues(status)
             display_sQueues(status)
-        except:
+        except Exception, e:
+            print(e)
             return None
     if debug_level == 1:
         try:
             display_jQueues(status, debug_level)
             display_sQueues(status, debug_level)
-        except:
+        except Exception, e:
             return None
 
 
@@ -650,7 +651,6 @@ def polling(status):
             # Copy files to a slave node.
             transfer_file(job, node, key_pair_path, input_dir,
                           local_run_script, debug_level)
-            time.sleep(1)
             myprint('transfer_file ' + job['JobId'] +
                     ' ' + node['InstanceId'], debug_level)
             display_scheduler_info(status, debug_level)
@@ -674,7 +674,11 @@ def polling(status):
                 scheduler_info_path, status, "run_jobs_on_remote_servers", scheduler_log_path, log_change_only)
             status = load_scheduler_status(scheduler_info_path)
 
+        time.sleep(10)
 
 def myprint(msg, debug_level):
     if debug_level > 0:
-        print msg
+        try:
+            print msg
+        except Exception, e:
+            print(e)
