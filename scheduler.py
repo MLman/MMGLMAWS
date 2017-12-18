@@ -382,6 +382,7 @@ def wait_and_terminate_servers(status, results_dir, wait_time=10):
     jobs = status['jobs']
     nodes = status['servers']
     while True:
+	sys.stdout.flush()
         time.sleep(wait_time)
         fnames = get_filenames(results_dir)
         job_ids = get_job_ids_from_filenames(fnames)
@@ -673,7 +674,7 @@ def polling(status):
             save_scheduler_status_wrapper(
                 scheduler_info_path, status, "run_jobs_on_remote_servers", scheduler_log_path, log_change_only)
             status = load_scheduler_status(scheduler_info_path)
-
+	sys.stdout.flush()
         time.sleep(10)
 
 def myprint(msg, debug_level):
